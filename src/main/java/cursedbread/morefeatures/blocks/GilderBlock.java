@@ -1,9 +1,11 @@
 package cursedbread.morefeatures.blocks;
 
+import cursedbread.morefeatures.FeaturesMain;
 import cursedbread.morefeatures.item.FeaturesItems;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.item.ItemStack;
@@ -20,6 +22,7 @@ public class GilderBlock extends Block {
     @Override
 	public boolean onBlockRightClicked(World world, int x, int y, int z, EntityPlayer player, Side side, double xPlaced, double yPlaced) {
         // Init the hash map, done now due to init order
+        item_map.put(Item.foodApple.id, new ItemStack(Item.foodAppleGold));
         item_map.put(Item.armorQuiver.id, new ItemStack(Item.armorQuiverGold));
         if (FeaturesItems.bombQuibersEnabled == 1) {
             item_map.put(FeaturesItems.bombBag.id, new ItemStack(FeaturesItems.bombBagGold));
@@ -58,11 +61,16 @@ public class GilderBlock extends Block {
 				world.setBlock(x + i, y - 1, z + j, 0);
 			}
 		}
-		//world.setBlock(x, y, z, Block.gravel.id);
+		if (FeaturesMain.rmGilding == 1) world.setBlock(x, y, z, Block.gravel.id);
 
 		// Give the item
 		stack.consumeItem(player);
+		// Inventory full, drop item instead
 		player.inventory.insertItem(is, true);
+		if (is.stackSize > 0) {
+            EntityItem itementity = new EntityItem(player.world, player.x, player.y, player.z, is);
+            player.world.entityJoinedWorld(itementity);
+        }
 		return true;
 	}
 }

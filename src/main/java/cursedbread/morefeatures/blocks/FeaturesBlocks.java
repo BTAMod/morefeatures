@@ -61,6 +61,7 @@ public class FeaturesBlocks {
 	public static Block gildingTable;
 
 	public static int gildingtableEnabled;
+	public static int starGilding;
 
 	public static Block vanillaColoredGlass;
 	public static Block vanillaColoredGlassTrapdoor;

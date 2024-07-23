@@ -2,6 +2,7 @@ package cursedbread.morefeatures.mixin;
 
 import cursedbread.morefeatures.item.FeaturesItems;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -11,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = EntityPlayer.class, remap = false)
 public class EntityPlayerMixin {
-	@Shadow
-	protected float baseSpeed;
+	@Shadow protected float baseSpeed;
+	@Shadow protected float baseFlySpeed;
 
 	@Inject(method = "onLivingUpdate()V", at = @At("TAIL"))
 	private void armor_effects(CallbackInfo ci) {
@@ -39,6 +40,8 @@ public class EntityPlayerMixin {
 			if (boots_item != null && boots_item.getItem().equals(FeaturesItems.olivineBoots)) {
 				this.baseSpeed += 0.02f;
 			}
+			// I made this up
+			this.baseFlySpeed = this.baseSpeed / 2.3f;
 		}
 	}
 }

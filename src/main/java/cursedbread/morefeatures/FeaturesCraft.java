@@ -14,6 +14,7 @@ import turniplabs.halplibe.helper.RecipeBuilder;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 import goocraft4evr.nonamedyes.item.ModItems;
 import luke.bonusblocks.block.BonusBlocks;
+import useless.moonsteel.MoonSteel;
 
 
 public class FeaturesCraft implements RecipeEntrypoint {
@@ -318,9 +319,11 @@ public class FeaturesCraft implements RecipeEntrypoint {
 			RecipeBuilder.Shaped(MOD_ID)
 				.setShape("HHH", "DDD", "EEE")
 				.addInput('H', Block.blockGold)
-				.addInput('D', Block.slate)
+				.addInput('D', FeaturesBlocks.starGilding == 1 ? MoonSteel.fallenStar : Block.slate)
 				.addInput('E', Block.slatePolished)
 				.create("gilderCraft", new ItemStack(FeaturesBlocks.gildingTable, 1));
+	  	    // Remove golden apple crafting
+    		RecipeBuilder.ModifyWorkbench("minecraft").removeRecipe("golden_apple");
 		}
 
 		//flower crowns crafting

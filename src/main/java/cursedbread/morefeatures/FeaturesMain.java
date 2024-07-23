@@ -18,6 +18,7 @@ public class FeaturesMain implements ModInitializer, GameStartEntrypoint {
 	public static boolean nonamedyesOn = ModVersionHelper.isModPresent("nonamedyes");
 	public static int paperWallAlt;
 	public static int newDungeonsEnabled;
+	public static int rmGilding;
 
 	static {
 		Properties prop = new Properties();
@@ -45,6 +46,8 @@ public class FeaturesMain implements ModInitializer, GameStartEntrypoint {
 		prop.setProperty("Add_mob_soul", "1");
 
 		prop.setProperty("Add_new_dungeons", "1");
+		prop.setProperty("Delete_gilding_after_use", "1");
+		prop.setProperty("Star_gilding_recipe", "1");
 		ConfigHandler config = new ConfigHandler(MOD_ID,prop);
 
 
@@ -59,6 +62,7 @@ public class FeaturesMain implements ModInitializer, GameStartEntrypoint {
 		FeaturesBlocks.gildingtableEnabled = config.getInt("Add_gilding_table");
 		FeaturesBlocks.glassEnabled = config.getInt("Add_colored_glass_blocks");
 		FeaturesBlocks.rainbowflowerEnabled = config.getInt("Add_rainbow_flower");
+		FeaturesBlocks.starGilding = config.getInt("Star_gilding_recipe");
 		//Items
 		FeaturesItems.flowerCrownEnabled = config.getInt("Add_flower_crowns");
 		FeaturesItems.regularCrownEnabled = config.getInt("Add_regular_crowns");
@@ -73,6 +77,7 @@ public class FeaturesMain implements ModInitializer, GameStartEntrypoint {
 		FeaturesItems.soulEnabled = config.getInt("Add_mob_soul");
 		//Extra
 		newDungeonsEnabled = config.getInt("Add_new_dungeons");
+		rmGilding = config.getInt("Delete_gilding_after_use");
 	}
     @Override
     public void onInitialize() {
